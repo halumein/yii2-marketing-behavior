@@ -1,0 +1,32 @@
+{
+    "name": "halumein/yii2-marketing-behavior",
+    "description": "Marketing behavior. Nuffsaid",
+    "keywords": ["behavior", "active record", "yii2"],
+    "homepage": "https://github.com/halumein/yii2-marketing-behavior",
+    "type": "yii2-behavior",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/halumein/yii2-marketing-behavior/issues",
+        "source": "https://github.com/halumein/yii2-marketing-behavior"
+    },
+    "authors": [
+        {
+            "name": "Vadim Trishkin",
+            "email": "halumein@gmail.com",
+            "homepage": "https://github.com/halumein"
+        },
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "^2"
+    },
+    "autoload": {
+        "psr-4": {
+            "halumein\\marketing\\": "src",
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "*",
+        "yiisoft/yii2-codeception": "^2"
+    }
+}
