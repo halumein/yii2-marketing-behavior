@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "halumein\\marketing\\": "src",
+            "halumein\\marketing\\": "src"
         }
     },
     "require-dev": {
