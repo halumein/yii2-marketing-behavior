@@ -7,10 +7,14 @@ use yii\base\Behavior;
 
 class MarketingBehavior extends Behavior
 {
+    public $freeProduct = null;
+    public $targetModel = null;
+    public $presentCostAmount = null;
+
     public function events()
     {
         return [
-            'create' => 'promo',
+            'cart_update' => 'onNCostFreePresent',
         ];
     }
 
@@ -20,10 +24,31 @@ class MarketingBehavior extends Behavior
 
     }
 
-    public function promo($event)
+    public function onNCostFreePresent($event)
     {
-        // $cartElements = yii::$app->cart->getElements();
-        // var_dump($cartElements);
+        // var_dump('<=====================>');
+
+        $cartElements = $event->cart;
+
+        $cartCount = $event->count;
+        $cartCost = $event->cost;
+
+        $freeElement = false;
+
+        foreach ($cartElements as $key => $element) {
+            if ($element->model == $this->freeProduct['model'] && $element->item_id == $this->freeProduct['id']) {
+                $freeElement = $element;
+                break;
+            }
+        }
+
+        if ($this->presentCostAmount != null && $cartCost > $this->presentCostAmount && $freeElement === false) {
+            $model = new $this->freeProduct['model'];
+            yii::$app->cart->put($model::findOne($this->freeProduct['id']));
+        } elseif ($this->presentCostAmount != null && $cartCost < $this->presentCostAmount && $freeElement !== false) {
+            yii::$app->cart->deleteElement($freeElement);
+        }
+
     }
 
 
